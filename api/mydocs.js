@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const Document = require('../Backend/models/Document');
-require('dotenv').config();
+const connectDb = require('./_db');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'secretkey123';
 
@@ -16,6 +16,7 @@ module.exports = async (req, res) => {
   if (req.method !== 'GET') return res.status(405).json({ message: 'Method not allowed' });
 
   try {
+    await connectDb();
     const authHeader = req.headers.authorization;
     const decoded = verifyToken(authHeader);
 

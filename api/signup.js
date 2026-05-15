@@ -1,11 +1,7 @@
-const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../Backend/models/User');
-require('dotenv').config();
-
-const app = express();
-app.use(express.json());
+const connectDb = require('./_db');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'secretkey123';
 
@@ -13,6 +9,7 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ message: 'Method not allowed' });
 
   try {
+    await connectDb();
     const { name, email, password, year, scholar_id, branch } = req.body;
 
     // Check if user exists
