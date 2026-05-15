@@ -10,7 +10,12 @@ const Download = () => {
     if (!fileId.trim()) return alert("Please enter a valid file ID");
 
     try {
-      const response = await fetch(apiUrl(`/api/download/${fileId}`));
+      const token = localStorage.getItem("token");
+      const response = await fetch(apiUrl(`/api/download/${fileId}`), {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (!response.ok) throw new Error("Download failed");
 
       const blob = await response.blob();

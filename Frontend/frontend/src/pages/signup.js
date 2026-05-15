@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../components/navbar";
+import { Link } from "react-router-dom";
 import { apiUrl } from "../config/api";
 
 function Signup() {
@@ -17,10 +18,16 @@ function Signup() {
     console.log("Signup Data:", formData);
 
     try {
+      const payload = {
+        ...formData,
+        scholar_id: Number(formData.scholar_id),
+        year: Number(formData.year),
+      };
+
       const res = await fetch(apiUrl("/api/signup"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
       const data = await res.json();
       if (data.success) {
@@ -100,9 +107,9 @@ function Signup() {
 
           <p className="text-center text-white/80 mt-6">
             Already have an account?{" "}
-            <a href="/login" className="text-purple-300 hover:underline">
+            <Link to="/login" className="text-purple-300 hover:underline">
               Login
-            </a>
+            </Link>
           </p>
         </div>
       </div>

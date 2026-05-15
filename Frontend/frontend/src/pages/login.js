@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../components/navbar";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { apiUrl } from "../config/api";
 
 function Login() {
@@ -76,9 +76,9 @@ function Login() {
 
           <p className="text-center text-white/80 mt-6">
             Don't have an account?{" "}
-            <a href="/signup" className="text-blue-300 hover:underline">
+            <Link to="/signup" className="text-blue-300 hover:underline">
               Sign Up
-            </a>
+            </Link>
           </p>
         </div>
       </div>
