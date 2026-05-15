@@ -7,6 +7,7 @@ const PORT=process.env.PORT || 5000;
 
 const allowedOrigins = [
     'https://peppy-naiad-93c25a.netlify.app',
+    'https://college-docs-t9ye.vercel.app',
     'http://localhost:3000'
 ];
 
