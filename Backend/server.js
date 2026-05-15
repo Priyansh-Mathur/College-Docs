@@ -7,13 +7,27 @@ const PORT=process.env.PORT || 5000;
 
 const allowedOrigins = [
     'https://peppy-naiad-93c25a.netlify.app',
+    'https://collegedocs.netlify.app',
     'https://college-docs-t9ye.vercel.app',
     'http://localhost:3000'
 ];
 
+const isAllowedOrigin = (origin) => {
+    if (!origin) return true;
+    if (allowedOrigins.includes(origin)) return true;
+
+    // Allow Netlify preview/deploy subdomains
+    try {
+        const host = new URL(origin).hostname;
+        return host.endsWith('.netlify.app');
+    } catch {
+        return false;
+    }
+};
+
 const corsOptions = {
     origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
+        if (isAllowedOrigin(origin)) {
             callback(null, true);
             return;
         }
